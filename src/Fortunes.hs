@@ -30,9 +30,31 @@ aTruly = do
   return ("A truly " ++ adj ++ " " ++ nonWI ++ " contains " ++ non1 ++
           " and " ++ non2 ++ " in abundance.")
 
+beOffered :: Random String
+beOffered = do
+  adj <- adjective
+  non <- noun
+  return ("You will be offered a " ++ adj ++ " " ++ non ++ ". Say yes!")
+
+soManyWays :: Random String
+soManyWays = do
+  adj <- adjective
+  non <- noun
+  return ("You are a " ++ adj ++ " " ++ non ++ " in so many ways.")
+
+youWillEnjoy :: Random String
+youWillEnjoy = do
+  adj <- adjective
+  nons <- shuffleM nouns
+  let (non1:non2:_) = take 2 nons
+  return ("You will enjoy " ++ adj ++ " " ++ non1 ++ "; you will be surrounded by " ++ non2 ++ ".")
+
 fortunes :: [(Random String)]
 fortunes = [ intoYourLife
-           , aTruly]
+           , aTruly
+           , beOffered
+           , soManyWays
+           , youWillEnjoy]
 
 fortune :: Random String
 fortune = do
